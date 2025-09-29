@@ -50,12 +50,13 @@ div id="options-content">
         </p>
     </div>
 
-    <!-- Section for API Key -->
-    <div id="api-key-section">
+    <!-- Section for API Key (hidden; use proxy instead) -->
+    <div id="api-key-section" style="display:none;">
         <h2>OpenAI API Key</h2>
-        <p>Enter your OpenAI API key to enable AI features. The key is stored locally in your browser's extension storage.</p>
-        <input type="password" id="openaiApiKey" placeholder="sk-..." style="width: 100%; padding: 8px; box-sizing: border-box;">
-        <div style="margin-top:8px;">
+        <p><em>Using the hosted proxy is strongly recommended. This field is hidden to discourage storing API keys in client extensions.</em></p>
+        <!-- inputs kept for backwards compatibility but hidden -->
+        <input type="password" id="openaiApiKey" placeholder="sk-..." style="width: 100%; padding: 8px; box-sizing: border-box; display:none;">
+        <div style="margin-top:8px; display:none;">
             <button id="saveApiKeyButton">Save API Key</button>
             <button id="clearApiKeyButton">Clear API Key</button>
         </div>
