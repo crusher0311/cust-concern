@@ -42,7 +42,9 @@ jobs:
 
       - name: Get new version
         id: get_version
-        run: echo "version=$(node -p \"require('./manifest.json').version\")" >> $GITHUB_OUTPUT
+        run: |
+          VERSION=$(node -e "console.log(require('./manifest.json').version)")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Create tag
         run: |
