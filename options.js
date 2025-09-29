@@ -75,71 +75,7 @@ document.getElementById('savePromptButton').addEventListener('click', function()
     });
 });
 
-// Save OpenAI API Key
-document.getElementById('saveApiKeyButton').addEventListener('click', function() {
-    const apiKey = document.getElementById('openaiApiKey').value.trim();
-    if (!apiKey) {
-        alert('Please enter a valid API key.');
-        return;
-    }
-    chrome.storage.local.set({ openaiApiKey: apiKey }, function() {
-        alert('API key saved locally.');
-    });
-});
-
-// Clear OpenAI API Key
-document.getElementById('clearApiKeyButton').addEventListener('click', function() {
-    if (confirm('Are you sure you want to clear the stored OpenAI API key?')) {
-        chrome.storage.local.remove('openaiApiKey', function() {
-            document.getElementById('openaiApiKey').value = '';
-            alert('API key cleared.');
-        });
-    }
-});
-
-// Save Proxy URL
-document.getElementById('saveProxyButton').addEventListener('click', function() {
-    const proxy = document.getElementById('openaiProxyUrl').value.trim();
-    if (!proxy) {
-        alert('Please enter a valid proxy URL or clear the field.');
-        return;
-    }
-    chrome.storage.local.set({ openaiProxyUrl: proxy }, function() {
-        alert('Proxy URL saved locally.');
-    });
-});
-
-// Clear Proxy URL
-document.getElementById('clearProxyButton').addEventListener('click', function() {
-    if (confirm('Are you sure you want to clear the saved proxy URL?')) {
-        chrome.storage.local.remove('openaiProxyUrl', function() {
-            document.getElementById('openaiProxyUrl').value = '';
-            alert('Proxy URL cleared.');
-        });
-    }
-});
-
-// Save Proxy Secret
-document.getElementById('saveProxyKeyButton').addEventListener('click', function() {
-    const key = document.getElementById('openaiProxyKey').value.trim();
-    if (!key) {
-        alert('Please enter the proxy secret.');
-        return;
-    }
-    chrome.storage.local.set({ openaiProxyKey: key }, function() {
-        alert('Proxy secret saved locally.');
-    });
-});
-
-// Clear Proxy Secret
-document.getElementById('clearProxyKeyButton').addEventListener('click', function() {
-    if (confirm('Are you sure you want to clear the saved proxy secret?')) {
-        chrome.storage.local.remove('openaiProxyKey', function() {
-            document.getElementById('openaiProxyKey').value = '';
-            alert('Proxy secret cleared.');
-        });
-    }
-});
+// Proxy and API key controls removed — proxy is handled server-side without client validation
 
 // Initialize the options page
 document.addEventListener('DOMContentLoaded', function() {
@@ -158,25 +94,5 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('openaiPrompt').value = result.openaiPrompt;
         }
     });
-
-    // Load saved OpenAI API Key (do not display it in plain text)
-    chrome.storage.local.get(['openaiApiKey'], function(result) {
-        if (result.openaiApiKey) {
-            document.getElementById('openaiApiKey').value = result.openaiApiKey;
-        }
-    });
-
-    // Load saved Proxy URL
-    chrome.storage.local.get(['openaiProxyUrl'], function(result) {
-        if (result.openaiProxyUrl) {
-            document.getElementById('openaiProxyUrl').value = result.openaiProxyUrl;
-        }
-    });
-
-    // Load saved Proxy Secret
-    chrome.storage.local.get(['openaiProxyKey'], function(result) {
-        if (result.openaiProxyKey) {
-            document.getElementById('openaiProxyKey').value = result.openaiProxyKey;
-        }
-    });
+    // Proxy and API key storage removed from client options
 });

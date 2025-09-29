@@ -23,17 +23,18 @@ Deploying:
 - Vercel: Create a new project that points to the `server` folder and add `OPENAI_API_KEY` as an environment variable.
 - Netlify / Azure Functions: Use your platform's method to deploy Node functions and supply the env var.
 
-Extension configuration:
-- Open the extension Options page (`options.html`).
-- Under "OpenAI Proxy URL", set your deployed proxy base URL (for example: https://my-proxy.example.com). The extension will append `/api/openai` when calling.
+Extension configuration (shared proxy):
+- This project supports a shared deployed proxy. The default proxy URL baked into the extension is:
+
+   https://cust-concern.vercel.app
+
+   The extension will append `/api/openai` when calling.
 
 Security notes:
 - Do not commit your OpenAI API key to source control.
-- Consider adding authentication (API key or OAuth) and rate-limiting to the proxy for production.
+- NOTE: This repository has been configured to use the shared proxy URL by default and to NOT require a proxy secret. That means any client that can reach this URL can forward requests through the proxy. If you want stronger protection, re-enable `PROXY_SECRET` validation on the server and update the extension to provide the secret.
 
-Proxy secret usage
-- If you set `PROXY_SECRET` on the server, the proxy will require clients to send it in the `x-proxy-key` request header. This prevents random third parties from using your proxy.
-- Configure the extension options page with the same secret so the extension sends it when calling the proxy.
+Optional (recommended for production): add authentication, per-install tokens, and rate-limiting to the proxy.
 
 Icon generation:
 - If you want to generate properly sized extension icons from `images/logo.png`, run the Node script:

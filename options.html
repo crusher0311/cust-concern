@@ -63,35 +63,7 @@
                 </p>
             </div>
 
-            <div id="api-key-section" class="section" style="display:none">
-                <h2>OpenAI API Key</h2>
-                <p class="muted"><em>Using the hosted proxy is strongly recommended. This field is hidden to discourage storing API keys in client extensions.</em></p>
-                <input type="password" id="openaiApiKey" placeholder="sk-...">
-                <div style="margin-top:8px">
-                    <button id="saveApiKeyButton" class="btn">Save API Key</button>
-                    <button id="clearApiKeyButton" class="btn secondary">Clear API Key</button>
-                </div>
-            </div>
-
-            <div id="proxy-section" class="section">
-                <h2>OpenAI Proxy URL (optional)</h2>
-                <p class="muted">If you deploy the recommended server-side proxy, set its base URL below (for example: <code>https://my-proxy.example.com</code>). If set, the extension will call your proxy instead of directly calling OpenAI.</p>
-                <input type="text" id="openaiProxyUrl" placeholder="https://your-proxy.example.com">
-                <div style="margin-top:8px">
-                    <button id="saveProxyButton" class="btn">Save Proxy URL</button>
-                    <button id="clearProxyButton" class="btn secondary">Clear Proxy URL</button>
-                </div>
-            </div>
-
-            <div id="proxy-secret-section" class="section">
-                <h2>Proxy Secret (optional)</h2>
-                <p class="muted">If your proxy requires a shared secret (recommended), enter it here. The extension will include it in requests as the <code>x-proxy-key</code> header.</p>
-                <input type="password" id="openaiProxyKey" placeholder="proxy-secret">
-                <div style="margin-top:8px">
-                    <button id="saveProxyKeyButton" class="btn">Save Proxy Secret</button>
-                    <button id="clearProxyKeyButton" class="btn secondary">Clear Proxy Secret</button>
-                </div>
-            </div>
+            <!-- Proxy and API key inputs removed — proxy handled server-side -->
         </div>
 
         <script src="options.js"></script>

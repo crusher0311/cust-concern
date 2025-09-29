@@ -3,14 +3,7 @@ const fetch = require('node-fetch');
 module.exports = async (req, res) => {
   const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
   const apiKey = process.env.OPENAI_API_KEY;
-  const proxySecret = process.env.PROXY_SECRET;
 
-  if (proxySecret) {
-    const provided = req.headers['x-proxy-key'] || '';
-    if (!provided || provided !== proxySecret) {
-      return res.status(401).json({ error: 'Unauthorized: invalid proxy key' });
-    }
-  }
 
   if (!apiKey) {
     return res.status(500).json({ error: 'OPENAI_API_KEY not configured on the server' });

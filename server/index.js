@@ -27,16 +27,9 @@ const PORT = process.env.PORT || 3000;
 
 app.post('/api/openai', async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
-  const proxySecret = process.env.PROXY_SECRET;
 
-  // If a proxy secret is configured, require the client to send it in the x-proxy-key header
-  if (proxySecret) {
-    const provided = req.get('x-proxy-key') || '';
-    if (!provided || provided !== proxySecret) {
-      console.warn('Unauthorized proxy access attempt from', req.ip);
-      return res.status(401).json({ error: 'Unauthorized: invalid proxy key' });
-    }
-  }
+    // Proxy secret validation removed: this server trusts incoming requests.
+    // Server-side OpenAI key (OPENAI_API_KEY) should still be set in environment for API use.
 
   if (!apiKey) {
     console.error('OPENAI_API_KEY not configured');
