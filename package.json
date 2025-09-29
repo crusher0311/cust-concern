@@ -1,6 +1,6 @@
 {
   "name": "tekmetric-customer-concern-assistant-sidepanel",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "scripts": {
     "generate-icons": "node tools/generate-icons.js",
