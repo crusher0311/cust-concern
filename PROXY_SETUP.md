@@ -10,6 +10,9 @@ Quick start (local):
 3. Set your OpenAI API key as an environment variable:
    # PowerShell
    $env:OPENAI_API_KEY = 'sk-...'
+4. (Optional but recommended) Set a proxy secret to require a header from the extension when calling the proxy:
+   # PowerShell
+   $env:PROXY_SECRET = 'some-long-random-string'
 4. Start the server:
    npm start
 5. The proxy will run at http://localhost:3000 by default. Example endpoint:
@@ -27,6 +30,10 @@ Extension configuration:
 Security notes:
 - Do not commit your OpenAI API key to source control.
 - Consider adding authentication (API key or OAuth) and rate-limiting to the proxy for production.
+
+Proxy secret usage
+- If you set `PROXY_SECRET` on the server, the proxy will require clients to send it in the `x-proxy-key` request header. This prevents random third parties from using your proxy.
+- Configure the extension options page with the same secret so the extension sends it when calling the proxy.
 
 Icon generation:
 - If you want to generate properly sized extension icons from `images/logo.png`, run the Node script:

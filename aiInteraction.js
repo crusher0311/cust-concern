@@ -21,11 +21,19 @@ export async function getPredictions(prompt, model = 'gpt-3.5-turbo') {
     if (proxyUrl) {
         // If proxy configured, forward to proxy (proxy should forward to OpenAI)
         try {
+            // Read optional proxy secret stored in extension options
+            const proxyKey = await new Promise((resolve) => {
+                chrome.storage.local.get(['openaiProxyKey'], function(result) {
+                    resolve(result.openaiProxyKey);
+                });
+            });
+
+            const headers = { 'Content-Type': 'application/json' };
+            if (proxyKey) headers['x-proxy-key'] = proxyKey;
+
             const response = await fetch(proxyUrl.replace(/\/$/, '') + '/api/openai', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers,
                 body: JSON.stringify(payload)
             });
 

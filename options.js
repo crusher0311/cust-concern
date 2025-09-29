@@ -119,6 +119,28 @@ document.getElementById('clearProxyButton').addEventListener('click', function()
     }
 });
 
+// Save Proxy Secret
+document.getElementById('saveProxyKeyButton').addEventListener('click', function() {
+    const key = document.getElementById('openaiProxyKey').value.trim();
+    if (!key) {
+        alert('Please enter the proxy secret.');
+        return;
+    }
+    chrome.storage.local.set({ openaiProxyKey: key }, function() {
+        alert('Proxy secret saved locally.');
+    });
+});
+
+// Clear Proxy Secret
+document.getElementById('clearProxyKeyButton').addEventListener('click', function() {
+    if (confirm('Are you sure you want to clear the saved proxy secret?')) {
+        chrome.storage.local.remove('openaiProxyKey', function() {
+            document.getElementById('openaiProxyKey').value = '';
+            alert('Proxy secret cleared.');
+        });
+    }
+});
+
 // Initialize the options page
 document.addEventListener('DOMContentLoaded', function() {
     loadConversations();
@@ -148,6 +170,13 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.local.get(['openaiProxyUrl'], function(result) {
         if (result.openaiProxyUrl) {
             document.getElementById('openaiProxyUrl').value = result.openaiProxyUrl;
+        }
+    });
+
+    // Load saved Proxy Secret
+    chrome.storage.local.get(['openaiProxyKey'], function(result) {
+        if (result.openaiProxyKey) {
+            document.getElementById('openaiProxyKey').value = result.openaiProxyKey;
         }
     });
 });

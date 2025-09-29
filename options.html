@@ -71,4 +71,15 @@ div id="options-content">
             <button id="clearProxyButton">Clear Proxy URL</button>
         </div>
     </div>
+
+    <!-- Section for Proxy Secret (optional, recommended) -->
+    <div id="proxy-secret-section">
+        <h2>Proxy Secret (optional)</h2>
+        <p>If your proxy requires a shared secret (recommended), enter it here. The extension will include it in requests as the <code>x-proxy-key</code> header.</p>
+        <input type="password" id="openaiProxyKey" placeholder="proxy-secret" style="width: 100%; padding: 8px; box-sizing: border-box;">
+        <div style="margin-top:8px;">
+            <button id="saveProxyKeyButton">Save Proxy Secret</button>
+            <button id="clearProxyKeyButton">Clear Proxy Secret</button>
+        </div>
+    </div>
 </div>

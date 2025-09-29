@@ -13,6 +13,16 @@ const PORT = process.env.PORT || 3000;
 
 app.post('/api/openai', async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
+  const proxySecret = process.env.PROXY_SECRET;
+
+  // If a proxy secret is configured, require the client to send it in the x-proxy-key header
+  if (proxySecret) {
+    const provided = req.get('x-proxy-key') || '';
+    if (!provided || provided !== proxySecret) {
+      return res.status(401).json({ error: 'Unauthorized: invalid proxy key' });
+    }
+  }
+
   if (!apiKey) {
     return res.status(500).json({ error: 'OPENAI_API_KEY not configured on the server' });
   }

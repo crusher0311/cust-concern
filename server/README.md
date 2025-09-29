@@ -8,6 +8,8 @@ Local usage:
 1. cd server
 2. npm install
 3. set OPENAI_API_KEY=sk-... (PowerShell: $env:OPENAI_API_KEY = 'sk-...')
+4. (Optional but recommended) set a proxy secret to require clients to present a token:
+	set PROXY_SECRET=some-long-random-string (PowerShell: $env:PROXY_SECRET = 'your-secret')
 4. npm start
 
 Vercel deployment:
