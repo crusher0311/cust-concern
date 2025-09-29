@@ -1,5 +1,9 @@
 name: Release
 
+# Allow the workflow to write repository contents (required to push bumped files and tags)
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
     inputs:
