@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Concern Assistant</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div id="extension-content">
-        <!-- Replacing the text with the logo -->
-        <div id="logo-container">
-            <img src="images/logo.png" alt="Your Logo" id="logo">
-        </div>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Customer Concern Assistant</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div id="extension-content" class="app-shell">
+            <header class="app-header">
+                <div class="logo-wrap">
+                    <img src="images/logo.png" alt="Logo" id="logo" />
+                </div>
+                <div class="title-wrap">
+                    <h1>Customer Concern Assistant</h1>
+                    <p class="tagline">Faster customer intake. Better tech clarity. Smarter follow-ups.</p>
+                </div>
+            </header>
 
-        <!-- Section: Enter Customer Concern -->
-        <div id="customer-concern-section">
-           
-            <textarea id="concernInput" placeholder="Type customer concern..."></textarea>
-            <div class="button-container">
-                <button id="submitConcernButton">Submit Concern</button>
-                <button id="clearFormButton">Clear Form</button>
+            <main class="main-grid">
+                <!-- Customer Concern Card -->
+                <section class="card" id="customer-concern-section">
+                    <label class="label">Customer Concern</label>
+                    <textarea id="concernInput" placeholder="Type customer concern..."></textarea>
+                    <div class="row actions-row">
+                        <button id="submitConcernButton" class="btn btn-primary">Submit</button>
+                        <button id="clearFormButton" class="btn btn-ghost">Clear</button>
+                    </div>
+                </section>
+
+                <!-- Follow-Up Questions Card -->
+                <section class="card" id="followUpListSection">
+                    <div class="section-header">
+                        <h2>Follow-Up Questions</h2>
+                    </div>
+                    <div id="followUpList" class="follow-list"></div>
+                    <div class="row actions-row">
+                        <button id="submitForReviewButton" class="btn btn-outline">Submit for Review</button>
+                        <button id="doneButton" class="btn btn-outline">Done</button>
+                    </div>
+                </section>
+
+                <!-- Active Conversation Card -->
+                <section class="card" id="activeConversationSection">
+                    <div class="section-header">
+                        <h2>Active Conversation</h2>
+                        <p class="muted">Edit, review, and send the cleaned conversation to Tekmetric.</p>
+                    </div>
+                    <div id="activeConversation" class="active-conversation"></div>
+
+                    <div class="row actions-row">
+                        <button id="copyConversationButton" class="btn btn-success">Copy Conversation</button>
+                        <button id="sendToTekmetricButton" class="btn btn-primary">Send To Tekmetric</button>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Preview Modal -->
+            <div id="previewModal" class="modal" aria-hidden="true" style="display:none;">
+                <div class="modal-content">
+                    <button id="previewClose" class="modal-close" aria-label="Close">✕</button>
+                    <h3 class="modal-title">Preview Cleaned Conversation</h3>
+                    <textarea id="previewText" class="preview-textarea" placeholder="Review and edit before sending..."></textarea>
+                    <div class="row modal-actions">
+                        <button id="previewEditButton" class="btn btn-ghost">Edit</button>
+                        <button id="previewSendButton" class="btn btn-primary">Send to Tekmetric</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Section: Follow-Up List -->
-        <div id="followUpListSection">
-            <h2>Follow-Up Questions</h2>
-            <div id="followUpList"></div>
-        </div>
-
-        <!-- Section: Submit and Done -->
-        <div class="button-container">
-            <button id="submitForReviewButton">Submit for Review</button>
-            <button id="doneButton">Done</button>
-        </div>
-
-        <!-- Section: Active Conversation -->
-        <div id="activeConversationSection">
-            <h2>Active Conversation</h2>
-            <div id="activeConversation"></div>
-            <button id="copyConversationButton">Copy Conversation</button>
-            <!-- New Button: Send To Tekmetric -->
-            <button id="sendToTekmetricButton">Send To Tekmetric</button>
-        </div>
-    </div>
-
-    <!-- Preview Modal -->
-    <div id="previewModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <span id="previewClose" class="modal-close">&times;</span>
-            <h2>Preview Cleaned Conversation</h2>
-            <textarea id="previewText" style="width:100%; height:200px;"></textarea>
-            <div style="margin-top:8px; text-align:right;">
-                <button id="previewEditButton">Edit</button>
-                <button id="previewSendButton">Send to Tekmetric</button>
-            </div>
-        </div>
-    </div>
-
-    <script type="module" src="popup.js"></script>
-</body>
+        <script type="module" src="popup.js"></script>
+    </body>
 </html>
