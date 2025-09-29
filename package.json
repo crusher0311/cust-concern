@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate-icons": "node tools/generate-icons.js"
+  "generate-icons": "node tools/generate-icons.js",
+  "bump": "node tools/bump-version.js"
   },
   "devDependencies": {
     "sharp": "^0.32.1"

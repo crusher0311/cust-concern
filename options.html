@@ -1,86 +1,99 @@
-div id="options-content">
-    <h1>Customer Concern Assistant - Options</h1>
-    
-    <!-- Section to View Saved Conversations -->
-    <div id="saved-conversations">
-        <h2>Saved Conversations</h2>
-        <div id="conversation-list"></div>
-        <button id="deleteAllBtn" class="delete-all-button">Delete All Conversations</button>
-    </div>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Customer Concern Assistant - Options</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            /* Small overrides for the options page to match sidepanel theme */
+            body { padding: 20px; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color: #111; }
+            h1 { margin: 0 0 12px 0; font-size: 20px; }
+            .options-container { max-width: 900px; }
+            .section { background:#fff; border:1px solid #e6e6e6; padding:12px; margin:10px 0; border-radius:6px; }
+            label { display:inline-flex; align-items:center; gap:8px; margin-right:12px }
+            input[type="text"], input[type="password"], textarea { width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; box-sizing:border-box }
+            textarea { min-height:80px }
+            .row { display:flex; gap:12px; align-items:center }
+            .muted { color:#666; font-size:13px }
+            .btn { background:#0b69ff; color:#fff; padding:6px 10px; border-radius:4px; border:none; cursor:pointer }
+            .btn.secondary { background:#f2f2f2; color:#111 }
+        </style>
+    </head>
+    <body>
+        <div class="options-container">
+            <h1>Customer Concern Assistant - Options</h1>
 
-    <!-- Section to Export Data -->
-    <div id="export-options">
-        <h2>Export Conversations</h2>
-        <button id="exportBtn">Export All Conversations</button>
-    </div>
+            <div id="saved-conversations" class="section">
+                <h2>Saved Conversations</h2>
+                <div id="conversation-list"></div>
+                <div style="margin-top:8px">
+                    <button id="deleteAllBtn" class="btn secondary">Delete All Conversations</button>
+                </div>
+            </div>
 
-    <!-- Section for Layout Options -->
-    <div id="layout-options">
-        <h2>Conversation Layout</h2>
-        <label>
-            <input type="radio" name="layout" value="paragraph" checked>
-            Paragraph Style
-        </label>
-        <label>
-            <input type="radio" name="layout" value="qa">
-            Q&A Style
-        </label>
-        <label>
-            <input type="radio" name="layout" value="sentence">
-            Sentence Style
-        </label>
-        <button id="saveLayout">Save Layout</button>
-    </div>
+            <div id="export-options" class="section">
+                <h2>Export Conversations</h2>
+                <button id="exportBtn" class="btn">Export All Conversations</button>
+            </div>
 
-    <!-- Section to View and Edit API Logic -->
-    <div id="api-logic-section">
-        <h2>API Logic Configuration</h2>
-        <textarea id="openaiPrompt" placeholder="Enter the default prompt for OpenAI..."></textarea>
-        <button id="savePromptButton">Save Prompt</button>
-    </div>
+            <div id="layout-options" class="section">
+                <h2>Conversation Layout</h2>
+                <div class="row">
+                    <label><input type="radio" name="layout" value="paragraph"> Paragraph Style</label>
+                    <label><input type="radio" name="layout" value="qa"> Q&A Style</label>
+                    <label><input type="radio" name="layout" value="sentence"> Sentence Style</label>
+                    <button id="saveLayout" class="btn">Save Layout</button>
+                </div>
+            </div>
 
-    <!-- Section for Readme -->
-    <div id="readme-section">
-        <h2>Instructions</h2>
-        <p>
-            1. Enter the customer's concern in the input box and click "Submit Concern".<br>
-            2. Follow-up questions will be listed in the Follow-Up List section. Click on a question to move it to the active area.<br>
-            3. Enter the customer's response to each follow-up question and click "Submit".<br>
-            4. Use the "Save" button to save the conversation when complete.
-        </p>
-    </div>
+            <div id="api-logic-section" class="section">
+                <h2>API Logic Configuration</h2>
+                <textarea id="openaiPrompt" placeholder="Enter the default prompt for OpenAI..."></textarea>
+                <div style="margin-top:8px"><button id="savePromptButton" class="btn">Save Prompt</button></div>
+            </div>
 
-    <!-- Section for API Key (hidden; use proxy instead) -->
-    <div id="api-key-section" style="display:none;">
-        <h2>OpenAI API Key</h2>
-        <p><em>Using the hosted proxy is strongly recommended. This field is hidden to discourage storing API keys in client extensions.</em></p>
-        <!-- inputs kept for backwards compatibility but hidden -->
-        <input type="password" id="openaiApiKey" placeholder="sk-..." style="width: 100%; padding: 8px; box-sizing: border-box; display:none;">
-        <div style="margin-top:8px; display:none;">
-            <button id="saveApiKeyButton">Save API Key</button>
-            <button id="clearApiKeyButton">Clear API Key</button>
+            <div id="readme-section" class="section muted">
+                <h2>Instructions</h2>
+                <p>
+                    1. Enter the customer's concern in the input box and click "Submit Concern".<br>
+                    2. Follow-up questions will be listed in the Follow-Up List section. Click on a question to move it to the active area.<br>
+                    3. Enter the customer's response to each follow-up question and click "Submit".<br>
+                    4. Use the "Save" button to save the conversation when complete.
+                </p>
+            </div>
+
+            <div id="api-key-section" class="section" style="display:none">
+                <h2>OpenAI API Key</h2>
+                <p class="muted"><em>Using the hosted proxy is strongly recommended. This field is hidden to discourage storing API keys in client extensions.</em></p>
+                <input type="password" id="openaiApiKey" placeholder="sk-...">
+                <div style="margin-top:8px">
+                    <button id="saveApiKeyButton" class="btn">Save API Key</button>
+                    <button id="clearApiKeyButton" class="btn secondary">Clear API Key</button>
+                </div>
+            </div>
+
+            <div id="proxy-section" class="section">
+                <h2>OpenAI Proxy URL (optional)</h2>
+                <p class="muted">If you deploy the recommended server-side proxy, set its base URL below (for example: <code>https://my-proxy.example.com</code>). If set, the extension will call your proxy instead of directly calling OpenAI.</p>
+                <input type="text" id="openaiProxyUrl" placeholder="https://your-proxy.example.com">
+                <div style="margin-top:8px">
+                    <button id="saveProxyButton" class="btn">Save Proxy URL</button>
+                    <button id="clearProxyButton" class="btn secondary">Clear Proxy URL</button>
+                </div>
+            </div>
+
+            <div id="proxy-secret-section" class="section">
+                <h2>Proxy Secret (optional)</h2>
+                <p class="muted">If your proxy requires a shared secret (recommended), enter it here. The extension will include it in requests as the <code>x-proxy-key</code> header.</p>
+                <input type="password" id="openaiProxyKey" placeholder="proxy-secret">
+                <div style="margin-top:8px">
+                    <button id="saveProxyKeyButton" class="btn">Save Proxy Secret</button>
+                    <button id="clearProxyKeyButton" class="btn secondary">Clear Proxy Secret</button>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Section for Proxy URL -->
-    <div id="proxy-section">
-        <h2>OpenAI Proxy URL (optional)</h2>
-        <p>If you deploy the recommended server-side proxy, set its base URL below (for example: <code>https://my-proxy.example.com</code>). If set, the extension will call your proxy instead of directly calling OpenAI.</p>
-        <input type="text" id="openaiProxyUrl" placeholder="https://your-proxy.example.com" style="width: 100%; padding: 8px; box-sizing: border-box;">
-        <div style="margin-top:8px;">
-            <button id="saveProxyButton">Save Proxy URL</button>
-            <button id="clearProxyButton">Clear Proxy URL</button>
-        </div>
-    </div>
-
-    <!-- Section for Proxy Secret (optional, recommended) -->
-    <div id="proxy-secret-section">
-        <h2>Proxy Secret (optional)</h2>
-        <p>If your proxy requires a shared secret (recommended), enter it here. The extension will include it in requests as the <code>x-proxy-key</code> header.</p>
-        <input type="password" id="openaiProxyKey" placeholder="proxy-secret" style="width: 100%; padding: 8px; box-sizing: border-box;">
-        <div style="margin-top:8px;">
-            <button id="saveProxyKeyButton">Save Proxy Secret</button>
-            <button id="clearProxyKeyButton">Clear Proxy Secret</button>
-        </div>
-    </div>
-</div>
+        <script src="options.js"></script>
+    </body>
+</html>
